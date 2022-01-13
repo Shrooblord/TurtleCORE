@@ -1,4 +1,4 @@
-# Intall New Code
+# Install New Code
 1. Use https://tweaked.cc/module/http.html to perform an HTTP GET https://computercraft.info/wiki/Http.request for the code in this repo using the url https://stackoverflow.com/a/53227723
 2. get latest commit to the repo's `main` branch: https://stackoverflow.com/a/45727280
 3. is this a different SHA than what we have recorded on disk (see step 6) / do we not have a SHA recorded on disk?
