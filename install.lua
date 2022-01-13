@@ -21,8 +21,10 @@ while requesting do
         print(res)
 
         requesting = false
-    elseif event == "http_failure" then
+    elseif e == "http_failure" then
         print("[E]: Server did not respond.")
         requesting = false
     end
 end
+
+-- save SHA of installation to file 'SHA' so we can do a diff later and update all necessary files
