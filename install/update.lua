@@ -10,3 +10,8 @@
 --      mv renamed files; delete and re-download 'modified' files
 -- 5. update SHA file with SHA retrieved in 0.
 -- 6. update complete!
+
+local req = require("lib.http.req")
+
+--this file...!
+req("https://raw.githubusercontent.com/Shrooblord/TurtleCORE/main/install/update.lua")
