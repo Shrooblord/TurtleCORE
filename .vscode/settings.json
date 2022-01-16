@@ -1,7 +1,9 @@
 {
     "Lua.diagnostics.globals": [
         "turtle",
-        "http"
+        "http",
+        "shell",
+        "fs"
     ],
     "Lua.diagnostics.disable": [
         "undefined-field"

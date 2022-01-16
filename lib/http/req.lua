@@ -1,4 +1,6 @@
 -- http request library
+-- this file on GitHub: https://raw.githubusercontent.com/Shrooblord/TurtleCORE/main/lib/http/req.lua
+-- also on Pastebin for convenience: https://pastebin.com/BR3xERWq
 -- TurtleCORE (C) Jango Course, 2017-2022
 
 local function req(url_in)
@@ -12,7 +14,7 @@ local function req(url_in)
         if e == "http_success" then
             local res = src.readAll()
             src.close()
-            
+
             requesting = false
             return res
         elseif e == "http_failure" then

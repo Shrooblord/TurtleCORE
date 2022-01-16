@@ -1,32 +1,39 @@
--- stand-alone installer tool -- no external libraries; all included in this file
---  for easy 'getting and installing'
+-- stand-alone installer tool for easy 'getting and installing'
+--   no external libraries required; all will be downloaded by this file
 -- this file on GitHub: https://raw.githubusercontent.com/Shrooblord/TurtleCORE/main/install/standaloneInstaller.lua
 -- also on Pastebin for convenience: https://pastebin.com/2PF0aFRA
 -- TurtleCORE (C) Jango Course, 2017-2022
 
---lib/http/req.lua
-local function req(url_in)
-    http.request(url_in)
+-- json.lua by rxi
+fs.makeDir("vendor")
+shell.run("pastebin", "get", "YWepwTWS", "vendor/json.lua")
 
-    local requesting = true
+-- lib/http/req.lua
+fs.makeDir("lib")
+fs.makeDir("lib/http")
+shell.run("pastebin", "get", "BR3xERWq", "lib/http/req.lua")
 
-    while requesting do
-        local e, url, src = os.pullEvent()
+local installer = [[
+local json = require("vendor.json")
+local req = require("lib.http.req")
 
-        if e == "http_success" then
-            local res = src.readAll()
-            src.close()
+local latestCommit = json.decode(req("https://api.github.com/repos/Shrooblord/TurtleCORE/commits/main"))
 
-            requesting = false
-            return res
-        elseif e == "http_failure" then
-            print("[E]: Server did not respond.")
-            requesting = false
-        end
-    end
+for k, v in pairs(latestCommit) do
+    print(k)
 end
 
-local res = req("https://raw.githubusercontent.com/Shrooblord/TurtleCORE/main/install/update.lua")
-print(res["sha"])
+--check SHA of latest commit -- different from the SHA stored on disk / no SHA stored on disk?
+--local update = req("https://raw.githubusercontent.com/Shrooblord/TurtleCORE/main/install/update.lua")
+-- save SHA of latest commit to file 'SHA' so we can do a diff later and update all necessary files
 
--- save SHA of update.lua to file 'SHA' so we can do a diff later and update all necessary files
+-- install over all files created including vendor/json.lua and lib/http/req.lua since the files on
+--    GitHub are 'leading' and the ones on Pastebin aren't guaranteed to be up-to-date
+]]
+
+fs.makeDir("install")
+local install = fs.open("install/install.lua", "w")
+    install.write(installer)
+install.close()
+
+shell.run("install/install.lua")
