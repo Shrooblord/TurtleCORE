@@ -5,6 +5,8 @@
 --      script on a turtle. Once it has this, this script will cascade-install
 --      all requirements automatically. But it needs this first. So you need to
 --      run the one-liner in-game.
+--   SEE: - https://pastebin.com/p8PJVxC4
+--        - https://github.com/eric-wieser/computercraft-github/blob/master/install.lua
 
 --this file...!
 http.request("https://raw.githubusercontent.com/Shrooblord/TurtleCORE/main/install.lua")
